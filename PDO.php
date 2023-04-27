@@ -6,6 +6,7 @@ try
         'mysql:host=127.0.0.1;dbname=we_love_food;charset=utf8',
         'root',
         '',
+        [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION],
     );    
 }
     catch (Exception $e) //catching errors
@@ -52,3 +53,15 @@ foreach ($recipes3 as $recipe3=>$value1)                //No double foreach beca
         echo $value1[$i];
     }
 }
+
+// proper sql request
+
+$sqlQuery4 = 'SELECT * FROM recipes WHERE author = :author AND is_enabled = :is_enabled';
+
+$recipesStatement4 = $db->prepare($sqlQuery);
+$recipesStatement4->execute([
+'author' => 'celine.ching@gmail.com',
+'is_enabled' => false,
+]);
+$recipes4 = $recipesStatemen4t->fetchAll();
+// ]); ?????? WHy ]); ?
