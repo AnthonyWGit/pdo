@@ -37,3 +37,18 @@ foreach ($recipes2 as $recipe2)
             <br/>".$recipe2['author']."
     </br>";    
 }
+echo "---------------------------------------------------------------------";
+$sqlQuery3 = 'SELECT * FROM recipes WHERE is_enabled = TRUE';
+$recipeStatement3 = $mysqlConnection->prepare($sqlQuery3);
+$recipeStatement3->execute();
+$recipes3 = $recipeStatement3->fetchAll();
+var_dump($recipes3);
+foreach ($recipes3 as $recipe3=>$value1)                //No double foreach because $recipes3 as the field twice
+{
+    $cvalue1 = count($value1);
+    var_dump($cvalue1);
+    for ($i = 1; $i < $cvalue1/2; $i++)
+    {
+        echo $value1[$i];
+    }
+}
